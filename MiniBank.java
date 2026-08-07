@@ -3,122 +3,85 @@ public class MiniBank {
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("       PRACTICAL 3 - MINIBANK");
+        System.out.println("       PRACTICAL 4 - MINIBANK");
         System.out.println("=================================");
 
-       
+    
 
-        Account account1 = new Account("Riya", 5000);
-        Account account2 = new Account("Rahul", 3000);
-        Account account3 = new Account("Het");
+        System.out.println("\n----- Mobile Validation -----");
 
-        Account[] accounts = {
-                account1,
-                account2,
-                account3
-        };
+        System.out.println(
+                "9876543210: "
+                        + Validator.isValidMobile("9876543210")
+        );
 
-       
+        System.out.println(
+                "12345: "
+                        + Validator.isValidMobile("12345")
+        );
 
-        System.out.println("\n----- Accounts -----");
+      
+        System.out.println("\n----- Email Validation -----");
 
-        for (Account account : accounts) {
-            System.out.println(account);
-        }
+        System.out.println(
+                "abc@xyz.com: "
+                        + Validator.isValidEmail("abc@xyz.com")
+        );
+
+        System.out.println(
+                "abc@xyz: "
+                        + Validator.isValidEmail("abc@xyz")
+        );
+
+      
+        System.out.println("\n----- PAN Validation -----");
+
+        System.out.println(
+                "ABCDE1234F: "
+                        + Validator.isValidPan("ABCDE1234F")
+        );
+
+        System.out.println(
+                "ABC123: "
+                        + Validator.isValidPan("ABC123")
+        );
+
+      
+
+        System.out.println("\n----- IFSC Validation -----");
+
+        System.out.println(
+                "SBIN0001234: "
+                        + Validator.isValidIfsc("SBIN0001234")
+        );
+
+        System.out.println(
+                "SBIN123: "
+                        + Validator.isValidIfsc("SBIN123")
+        );
+
+    
+
+        System.out.println("\n----- Command Parser -----");
+
+        String input = "DEPOSIT AC0001 500";
+
+        Command command = CommandParser.parse(input);
+
+        System.out.println("Input: " + input);
+        System.out.println("Type: " + command.type());
+        System.out.println("Account Number: " + command.accountNumber());
+        System.out.println("Amount: " + command.amount());
 
         
+        System.out.println("\n----- Account Statement -----");
 
-        System.out.println("\n----- equals() Test -----");
-
-        System.out.println(
-                "account1.equals(account2): "
-                        + account1.equals(account2)
-        );
+        Account account = new Account("Riya", 5000);
 
         System.out.println(
-                "account1.equals(account1): "
-                        + account1.equals(account1)
+                StatementFormatter.buildStatement(account)
         );
 
-        // --------------------------------
-        // hashCode() test
-        // --------------------------------
-
-        System.out.println("\n----- hashCode() Test -----");
-
-        System.out.println(
-                "Account 1 hashCode: "
-                        + account1.hashCode()
-        );
-
-        System.out.println(
-                "Account 2 hashCode: "
-                        + account2.hashCode()
-        );
-
-        
-        System.out.println("\n----- instanceof Test -----");
-
-        Object object = account1;
-
-        if (object instanceof Account) {
-            System.out.println("object is an Account.");
-        } else {
-            System.out.println("object is not an Account.");
-        }
-
-        Customer.Address address =
-                new Customer.Address(
-                        "123 Main Street",
-                        "Ahmedabad",
-                        "380001"
-                );
-
-        Customer customer =
-                new Customer(
-                        "Riya",
-                        "riya@gmail.com",
-                        "9876543210",
-                        address
-                );
-
-        System.out.println("\n----- Customer -----");
-
-        System.out.println("Customer ID: "
-                + customer.getCustomerId());
-
-        System.out.println("Name: "
-                + customer.getName());
-
-        System.out.println("Email: "
-                + customer.getEmail());
-
-        System.out.println("Mobile: "
-                + customer.getMobile());
-
-        System.out.println("Address: "
-                + customer.getAddress());
-
-        
-        Customer clonedCustomer = customer.clone();
-
-        System.out.println("\n----- Clone Test -----");
-
-        System.out.println(
-                "Original Customer ID: "
-                        + customer.getCustomerId()
-        );
-
-        System.out.println(
-                "Cloned Customer ID: "
-                        + clonedCustomer.getCustomerId()
-        );
-
-        System.out.println(
-                "Cloned Customer Name: "
-                        + clonedCustomer.getName()
-        );
-
-        System.out.println("\nPractical 3 completed successfully.");
+        System.out.println("\nPractical 4 completed successfully.");
     }
 }
