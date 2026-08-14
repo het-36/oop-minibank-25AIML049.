@@ -3,85 +3,102 @@ public class MiniBank {
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("       PRACTICAL 4 - MINIBANK");
+        System.out.println("       PRACTICAL 5 - MINIBANK");
         System.out.println("=================================");
 
-    
+        // Create different account types
+        SavingsAccount savings =
+                new SavingsAccount("Riya", 5000, 2000);
 
-        System.out.println("\n----- Mobile Validation -----");
+        CurrentAccount current =
+                new CurrentAccount("Rahul", 5000, 2000);
+
+        FixedDepositAccount fixedDeposit =
+                new FixedDepositAccount("Het", 10000);
+
+        // Store different account types in one Account array
+        Account[] accounts = {
+                savings,
+                current,
+                fixedDeposit
+        };
+
+        // Runtime polymorphism
+        System.out.println("\n----- Account Details -----");
+
+        for (Account account : accounts) {
+
+            System.out.println(
+                    "Account Number: " + account.getAccountNumber()
+            );
+
+            System.out.println(
+                    "Owner: " + account.getOwnerName()
+            );
+
+            System.out.println(
+                    "Balance: " + account.getBalance()
+            );
+
+            System.out.println(
+                    "Interest Rate: " + account.interestRate() + "%"
+            );
+
+            System.out.println();
+        }
+
+        // Test withdrawal rules
+        System.out.println("----- Withdrawal Tests -----");
 
         System.out.println(
-                "9876543210: "
-                        + Validator.isValidMobile("9876543210")
+                "Savings withdraw 3000: "
+                        + savings.withdraw(3000)
         );
 
         System.out.println(
-                "12345: "
-                        + Validator.isValidMobile("12345")
-        );
-
-      
-        System.out.println("\n----- Email Validation -----");
-
-        System.out.println(
-                "abc@xyz.com: "
-                        + Validator.isValidEmail("abc@xyz.com")
+                "Savings balance: "
+                        + savings.getBalance()
         );
 
         System.out.println(
-                "abc@xyz: "
-                        + Validator.isValidEmail("abc@xyz")
-        );
-
-      
-        System.out.println("\n----- PAN Validation -----");
-
-        System.out.println(
-                "ABCDE1234F: "
-                        + Validator.isValidPan("ABCDE1234F")
+                "Current withdraw 7000: "
+                        + current.withdraw(7000)
         );
 
         System.out.println(
-                "ABC123: "
-                        + Validator.isValidPan("ABC123")
-        );
-
-      
-
-        System.out.println("\n----- IFSC Validation -----");
-
-        System.out.println(
-                "SBIN0001234: "
-                        + Validator.isValidIfsc("SBIN0001234")
+                "Current balance: "
+                        + current.getBalance()
         );
 
         System.out.println(
-                "SBIN123: "
-                        + Validator.isValidIfsc("SBIN123")
+                "Fixed Deposit withdraw 1000: "
+                        + fixedDeposit.withdraw(1000)
         );
-
-    
-
-        System.out.println("\n----- Command Parser -----");
-
-        String input = "DEPOSIT AC0001 500";
-
-        Command command = CommandParser.parse(input);
-
-        System.out.println("Input: " + input);
-        System.out.println("Type: " + command.type());
-        System.out.println("Account Number: " + command.accountNumber());
-        System.out.println("Amount: " + command.amount());
-
-        
-        System.out.println("\n----- Account Statement -----");
-
-        Account account = new Account("Riya", 5000);
 
         System.out.println(
-                StatementFormatter.buildStatement(account)
+                "Fixed Deposit balance: "
+                        + fixedDeposit.getBalance()
         );
 
-        System.out.println("\nPractical 4 completed successfully.");
+        // Pattern instanceof check
+        System.out.println("\n----- instanceof Pattern Test -----");
+
+        for (Account account : accounts) {
+
+            if (account instanceof SavingsAccount savingsAccount) {
+
+                System.out.println(
+                        "Savings Account found: "
+                                + savingsAccount.getOwnerName()
+                );
+
+                System.out.println(
+                        "Minimum Balance: "
+                                + savingsAccount.getMinBalance()
+                );
+            }
+        }
+
+        System.out.println("\nPractical 5 completed successfully.");
     }
-}
+} 
